@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CourseAndStudentController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\RegisterCourseController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,10 +29,19 @@ Route::controller(CourseController::class)->group(function () {
     Route::delete('/course/{id}','destroy');
 });
 
-Route::controller(Teacher::class)->group(function () {
+Route::controller(TeacherController::class)->group(function () {
     Route::get('/teacher/{id}', 'show');
     Route::get('/teacher', 'list');
     Route::post('/teacher','create');
     Route::patch('/teacher/{id}','update');
     Route::delete('/teacher/{id}','destroy');
+});
+
+Route::controller(CourseAndStudentController::class)->group(function () {
+    Route::post('/addStudentToCourse','addStudentToCourse');
+});
+
+Route::controller(RegisterCourseController::class)->group(function () {
+    Route::post('/requestToCourse','requestToCourse');
+    Route::post('/listRequest','listRequest');
 });
