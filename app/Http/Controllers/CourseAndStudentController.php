@@ -13,7 +13,9 @@ class CourseAndStudentController extends Controller
             'register_request_id',
         ]);
 
-        $checkRequest = RegisterCourse::find($data['register_request_id']);
+        $checkRequest = RegisterCourse::query()->where('id',$data['register_request_id'])
+                        ->whereNotIn('status',[RegisterCourse::STATUS_DELETED,RegisterCourse::STATUS_ACCEPT,RegisterCourse::STATUS_REJECT])
+                        ->first();
         if($checkRequest){
             $studentAndCourse = new CourseAndStudent;
             $studentAndCourse->course_id = $checkRequest->course_id;
