@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CourseController::class,'index']);
 
 Route::controller(CourseController::class)->group(function () {
     Route::get('/course/{id}', 'show');
