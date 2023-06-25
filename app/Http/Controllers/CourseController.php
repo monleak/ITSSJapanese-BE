@@ -9,17 +9,6 @@ use App\Models\Course;
 
 class CourseController extends Controller
 {
-    // Course table
-    // id		
-    // name		
-    // level		
-    // method		
-    // description		
-    // price		
-    // id_teacher		
-    // created_at		
-    // updated_at		
-
     public function show($id){
         $course = Course::find($id);
         return $course;
