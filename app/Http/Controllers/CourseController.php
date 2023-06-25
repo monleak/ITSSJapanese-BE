@@ -20,16 +20,38 @@ class CourseController extends Controller
     // created_at		
     // updated_at		
 
-    public function show($id){
-        $course = Course::find($id);
-        return $course;
+    public function index(Request $request)
+    {
+        // if(isset(Auth::user()->role)&&(Auth::user()->role == 'teacher')){
+        //     return view('course.course-index',[
+        //         'listings'=> Course::latest()->filter(request(['search']))->get()
+        //     ]);
+        // }
+        // // dd($request->tag);
+        // else{
+        return view('course.course-index', [
+            // 'listings' => Listing::all()
+            'listings' => Course::latest()->filter(request(['search']))->get()
+        ]);
+        // }
     }
-    public function list(Request $request){
+    // Show single course
+    public function show(Course $listing)
+    {
+        return view('course.show', [
+            //variable_name => values
+            'listing' => $listing
+        ]);
+    }
+
+    public function list(Request $request)
+    {
         $data = Course::all();
         return $data;
     }
 
-    public function create(CreateCourseRequest $request){
+    public function create(CreateCourseRequest $request)
+    {
         $course = Course::create($request->all());
         return [
             "status" => 200,
@@ -37,7 +59,8 @@ class CourseController extends Controller
         ];
     }
 
-    public function update(UpdateCourseRequest $request){
+    public function update(UpdateCourseRequest $request)
+    {
         $course = Course::find($request->id);
         $course->name = $request->name;
         $course->level = $request->level;
@@ -53,7 +76,8 @@ class CourseController extends Controller
         ];
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $course = Course::find($id);
         $course->delete();
 
