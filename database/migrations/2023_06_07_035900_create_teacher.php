@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('designation');
             $table->string('skills');
-            $table->string('experience');
-            $table->string('description');
+            $table->float('experience');
+            $table->text('description');
             $table->string('photo');
             $table->timestamps();
         });
