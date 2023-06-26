@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use Hamcrest\Collection\IsEmptyTraversable;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use PHPUnit\Framework\Constraint\IsEmpty;
 
 class CourseController extends Controller
 {
@@ -29,11 +31,19 @@ class CourseController extends Controller
         // }
         // // dd($request->tag);
         // else{
-        return view('course.course-index', [
-            // 'listings' => Listing::all()
-            'listings' => Course::latest()->filter(request(['search']))->get()
-        ]);
-        // }
+        $input = $request->all();
+        if(empty($input) || array_key_exists('search', $input)){
+            return view('course.course-index', [
+                // 'listings' => Listing::all()
+                'listings' => Course::latest()->filter(request(['search']))->get()
+            ]);
+        }else{
+            return view('course.course-index', [
+                // 'listings' => Listing::all()
+                'listings' => Course::latest()->filter($input)->get()
+            ]);
+        }
+        
     }
     // Show single course
     public function show(Course $listing)
