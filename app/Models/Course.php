@@ -5,6 +5,7 @@ namespace App\Models;
 use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Course extends Model
 {
@@ -24,6 +25,7 @@ class Course extends Model
     public function Teacher(){
         return $this->belongsTo(Teacher::class);
     }
+
     public function scopeFilter($query, array $filter){
         if(array_key_exists('search', $filter) || empty($filter)){
             // dd($query);
@@ -53,7 +55,11 @@ class Course extends Model
             }
             if($filter['exp'] != '#' ){
                 $teacher = DB::table('teachers')->select('id')->whereRaw("experience".request('exp'))->get()->first();
-                $query->where('teacher_id',$teacher->id);
+                if(isset($teacher)){
+                    $query->where('teacher_id',$teacher->id);
+                }else{
+                    $query->where('teacher_id',-1);
+                }
             }
             if($filter['city'] != '#' ){
                 $teacher = DB::table('teachers')->select('id')->where("designation",'like','%'.request('search').'%')->get()->first();

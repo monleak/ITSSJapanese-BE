@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,7 +22,7 @@
             },
         };
     </script>
-    <title>ichiSensei</title>
+    <title>ichisensei</title>
 </head>
 
 <body class="mb-48">
@@ -32,15 +33,15 @@
             <label for="simple-search" class="sr-only">Search</label>
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
-                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                             d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                             clip-rule="evenodd"></path>
                     </svg>
                 </div>
                 <input name="search" type="text" id="simple-search"
-                    class="border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-1  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-1 "
                     placeholder="">
             </div>
         </form>
@@ -60,33 +61,46 @@
                 </li>
             </div>
         </ul>
-        <div class="absolute right-0 flex flex-row gap-3 px-4 py-2 rounded-lg bg-white ">
-            <ul class="flex space-x-6 mr-6 text-lg">
-                @guest
-                    <li>
-                        <a href="/login" class="hover:text-black"><i class="fa-solid fa-arrow-right-to-bracket"></i>
-                            Login</a>
-                    </li>
-                    <li>
-                        <a href="/register" class="hover:text-black"><i class="fa-solid fa-user-plus"></i> Register</a>
-                    </li>
-                </ul>
-            @else
-                {{-- <a href="/home" class="block py-2 px-3 rounded-lg  hover:bg-gray-800 hover:text-white">
+
+        <div class="absolute right-2 flex flex-row gap-3 px-4 py-2 rounded-lg bg-white ">
+            {{-- <a href="/home" class="block py-2 px-3 rounded-lg  hover:bg-gray-800 hover:text-white">
                 <i class="fa-sharp fa-solid fa-book"></i> My Course</a> --}}
-                <a href="/profile" class="block py-2 px-3 rounded-lg  hover:bg-gray-800 hover:text-white">
-                    <i class="fa-sharp fa-solid fa-user"></i>
-                    {{ Auth::user()->name }} <span class="caret"></span>
-                </a>
-                <a href="{{ route('logout') }}" class="block py-2 px-3  rounded-lg  hover:bg-gray-800 hover:text-white"
-                    onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                    <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
-                    Log Out</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            @endguest
+            {{-- <a href="/profile" class="block py-2 px-3 rounded-lg  hover:bg-gray-800 hover:text-white">
+                <i class="fa-sharp fa-solid fa-user"></i>
+                {{ Auth::user()->name }} <span class="caret"></span>
+            </a> --}}
+            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                class="text-black hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button">
+                <i class="fa-sharp fa-solid fa-user mr-1"></i>
+                {{ Auth::user()->name }} <span class="caret"></span>
+                <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdown"
+                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    <x-dropdown-link :href="route('profile.edit')">
+                        {{ __('プロフィール') }}
+                    </x-dropdown-link>
+                    <x-dropdown-link :href="route('myCourse')">
+                        {{ __('コース管理') }}
+                    </x-dropdown-link>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            {{ __('ログアウト') }}
+                        </x-dropdown-link>
+                    </form>
+                </ul>
+            </div>
+
         </div>
     </nav>
     <div class="flex justify-between mt-2 border-y border-grey">
@@ -109,6 +123,7 @@
     @else
     @endguest
     <x-flash-message />
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 </body>
 
 </html>
