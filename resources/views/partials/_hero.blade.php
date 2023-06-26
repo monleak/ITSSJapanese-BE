@@ -1,5 +1,5 @@
 <section
-class=" bg-slate-200 relative h-72 flex flex-col justify-center align-center text-center space-y-4 mb-4"
+class="mt-5 bg-slate-200 relative h-72 flex flex-col justify-center align-center text-center space-y-4 mb-4"
 >
 <div class="grid gap-4 grid-col-3 grid-row-1">
     <div class="z-10">
@@ -10,13 +10,13 @@ class=" bg-slate-200 relative h-72 flex flex-col justify-center align-center tex
             ベトナム語を勉強しよう
         </p>
         @guest
-        <div>
+        {{-- <div>
             <a
                 href="/login"
                 class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black"
                 >登録する</a
             >
-        </div>
+        </div> --}}
         @else
             @if(Auth::user()->role == 'student')
             <div>

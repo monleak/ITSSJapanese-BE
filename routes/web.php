@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [CourseController::class,'index']);
 
 Route::controller(CourseController::class)->group(function () {
-    Route::get('/course/{id}', 'show');
+    Route::get('/course/{listing}', 'show');
     Route::post('/course/list', 'list');
     Route::post('/course','create');
     Route::patch('/course/{id}','update');

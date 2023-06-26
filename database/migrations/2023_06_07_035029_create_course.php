@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('method',['online', 'offline']);
             $table->text('description');
             $table->bigInteger('price');
-            $table->integer('id_teacher');
+            $table->integer('teacher_id');
             $table->timestamps();
         });
     }
