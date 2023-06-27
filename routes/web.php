@@ -43,3 +43,6 @@ Route::controller(RegisterCourseController::class)->group(function () {
     Route::post('/requestToCourse','requestToCourse');
     Route::post('/listRequest','listRequest');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
