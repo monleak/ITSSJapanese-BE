@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCourseRequest;
 use Hamcrest\Collection\IsEmptyTraversable;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\Constraint\IsEmpty;
 
 class CourseController extends Controller
@@ -21,7 +22,25 @@ class CourseController extends Controller
     // id_teacher		
     // created_at		
     // updated_at		
+    public function myCourse(Request $request){
+        $input = $request->all();
+        if(Auth::user()->role=='teacher'){
+            if(empty($input) || array_key_exists('search', $input)){
+                return view('teacher.mycourse', [
+                    // 'listings' => Listing::all()
+                    'listings' => Course::latest()->filter(request(['search']))->get()
+                ]);
+            }else{
+                return view('teacher.mycourse', [
+                    // 'listings' => Listing::all()
+                    'listings' => Course::latest()->filter($input)->get()
+                ]);
+            }
+        }else{
+            return view('student.mycourse');
+        }
 
+    }
     public function index(Request $request)
     {
         // if(isset(Auth::user()->role)&&(Auth::user()->role == 'teacher')){

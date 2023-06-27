@@ -4,8 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Course;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\Teacher;
+use Illuminate\Support\Facades\Hash;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -19,20 +23,41 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        User::create([
+            'id' => 1,
+            'name' => "Le Tuan Hung",
+            'email' => "teacher@gmail.com",
+            'password' => Hash::make("123"),
+            'role' => 'teacher'
+        ]);
+        User::create([
+            'id' => 2,
+            'name' => "Tran Minh Quan",
+            'email' => "student@gmail.com",
+            'password' => Hash::make("123"),
+            'role' => 'student'
+        ]);
+        Student::create([
+            'id'=>2,
+            'email' => "student@gmail.com",
+            'fullname' => 'Tran Minh Quan',
+            'password' => '123',
+            'designation' => 'Ha Noi'
+        ]);
         Teacher::create([
-            'id'=>1,
-            'email'=>'teacher@gmail.com',
-            'fullname'=>'Le Tuan Hung',
-            'gender'=>'male',
-            'password'=>'123',
-            'designation'=>'Ha Noi',
-            'skills'=>'',
-            'experience'=>'5',
-            'description'=>'
+            'id' => 1,
+            'email' => 'teacher@gmail.com',
+            'fullname' => 'Le Tuan Hung',
+            'gender' => 'male',
+            'password' => '123',
+            'designation' => 'Ha Noi',
+            'skills' => '',
+            'experience' => '5',
+            'description' => '
             HUSTの日本語教師
             年の指導経験
             N5からN1レベルのクラスを提供',
-            'photo'=>'E:\20222\ITSS in Japanese\project-ichiichi\ITSSJapanese-BE\public\images\ava.png'
+            'photo' => 'E:\20222\ITSS in Japanese\project-ichiichi\ITSSJapanese-BE\public\images\ava.png'
         ]);
         Course::create([
             'id' => 1,
@@ -40,8 +65,8 @@ class DatabaseSeeder extends Seeder
             'description' => "これはベトナム語のアルファベットと基本的な言葉と発音を教えるコースです。",
             'teacher_id' => 1,
             'price' => 300000,
-            'method'=> 'Online',
-            'level'=>'A'    
+            'method' => 'Online',
+            'level' => 'A'
         ]);
         Course::create([
             'id' => 2,
@@ -49,8 +74,8 @@ class DatabaseSeeder extends Seeder
             'description' => "これは生活でよく使われる言葉と発音を教えるコースです。",
             'teacher_id' => 1,
             'price' => 600000,
-            'method'=> 'Online',
-            'level'=>'B'    
+            'method' => 'Online',
+            'level' => 'B'
         ]);
         Course::create([
             'id' => 3,
@@ -58,8 +83,8 @@ class DatabaseSeeder extends Seeder
             'description' => "これはCレベルを取得ために、行われるコースです。",
             'teacher_id' => 1,
             'price' => 2100000,
-            'method'=> 'Offline',
-            'level'=>'C'    
+            'method' => 'Offline',
+            'level' => 'C'
         ]);
     }
 }
