@@ -20,10 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [CourseController::class,'index'])->middleware(['auth', 'verified'])->name('index');
+Route::get('/listings/{listing}', [CourseController::class,'show'])->name('course.show');
 
 Route::controller(CourseController::class)->group(function () {
     Route::get('/course', 'myCourse')->middleware(['auth', 'verified'])->name('myCourse');
-    Route::get('/course/{listing}', 'show')->name('course.show');
+    // Route::resource('')
     Route::get('/course/create', 'create')->name('course.create');
     Route::post('/course/store','store')->name('course.store');
     Route::patch('/course/{id}','update');
@@ -43,6 +44,7 @@ Route::controller(CourseAndStudentController::class)->group(function () {
 })->middleware(['auth', 'verified'])->name('joinCourse');
 
 Route::controller(RegisterCourseController::class)->group(function () {
+    Route::get('/requests','index')->name('request.index');
     Route::post('/createRequest','createRequest')->middleware(['auth', 'verified'])->name('request.create');
     Route::post('/requestToCourse','requestToCourse');
     Route::post('/listRequest','listRequest');

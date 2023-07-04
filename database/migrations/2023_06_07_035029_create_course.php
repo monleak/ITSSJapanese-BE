@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('level');
             $table->enum('method',['online', 'offline']);
+            $table->text('introduction')->nullable();
             $table->text('description');
             $table->bigInteger('price');
             $table->integer('teacher_id');

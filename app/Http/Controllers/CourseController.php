@@ -8,6 +8,7 @@ use Hamcrest\Collection\IsEmptyTraversable;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use PHPUnit\Framework\Constraint\IsEmpty;
 
 class CourseController extends Controller
@@ -72,20 +73,34 @@ class CourseController extends Controller
             'listing' => $listing
         ]);
     }
-
+    public function create()
+    {
+        return(view('course.create'));
+    }
     public function list(Request $request)
     {
         $data = Course::all();
         return $data;
     }
 
-    public function create()
-    {
-        return view('course.create',[]);
-    }
 
-    public function store(CreateCourseRequest $request){
 
+    public function store(Request $request) {
+
+        $formField = $request->validate([
+            'course_name' => Rule::unique('courses', 'name'),
+        ]);
+        Course::create([
+            'name' => $_POST['course_name'] ,
+            'teacher_id' => $_POST['teacher_id'],
+            'level' => $_POST['course_level'],
+            'method' =>  ($_POST['course_method'] == 'online' ? 'online' : 'offline'),
+            'introduction' => $_POST['course_intro'],
+            'description' => $_POST['course_description'],
+            'price'=>$_POST['course_price']?$_POST['course_price']:0,
+        ]);        
+
+        return redirect('/course')->with('message', 'コース作成は成功でした !');
     }
 
     public function update(UpdateCourseRequest $request)

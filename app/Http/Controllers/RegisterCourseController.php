@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\RegisterCourse;
 use Exception;
 use Illuminate\Http\Request;
@@ -14,6 +15,29 @@ class RegisterCourseController extends Controller
      * Update: Chỉ được update trường status
      * Delete: Update trường status thành deleted (Không xóa trong db)
      */
+    public function index()
+    {
+        // if(isset(Auth::user()->role)&&(Auth::user()->role == 'teacher')){
+        //     return view('course.course-index',[
+        //         'listings'=> Course::latest()->filter(request(['search']))->get()
+        //     ]);
+        // }
+        // // dd($request->tag);
+        // else{
+        $input = RegisterCourse::all();
+        if(empty($input) || array_key_exists('search', $input)){
+            return view('course.course-index', [
+                // 'listings' => Listing::all()
+                'listings' => Course::latest()->filter(request(['search']))->get()
+            ]);
+        }else{
+            return view('course.course-index', [
+                // 'listings' => Listing::all()
+                'listings' => Course::latest()->filter($input)->get()
+            ]);
+        }
+        
+    }
     public function createRequest(Request $request)
     {
         RegisterCourse::create([
