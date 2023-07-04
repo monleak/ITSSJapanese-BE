@@ -1,4 +1,4 @@
-<form action="/">
+<form action="/course">
     <div class="relative mx-24 p-5">
         <div class="flex justify-start font-semibold">
             <div

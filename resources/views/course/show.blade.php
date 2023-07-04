@@ -20,7 +20,6 @@
                 @if (Auth::user()->role == 'student' &&
                         null ==
                             DB::table('register_request')->select('id')->where('student_id', Auth::user()->id)->where('course_id', $listing->id)->get()->first())
-                    {{-- {{dd(DB::table("register_request")->select('id')->where('student_id',Auth::user()->id)->get()->first())}} --}}
                     <form action="/createRequest" method="post">
                         @csrf
                         <input type="hidden" name="course_id" value="{{ $listing->id }}">
@@ -28,11 +27,9 @@
                         <button class="block w-20 bg-teal-300 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold "
                             type="submit">登録</button>
                     </form>
-                    {{-- <a href="/register" class="block w-20 bg-teal-300 text-black mt-6 py-2 rounded-xl hover:opacity-80">
-                        登録
-                    </a> --}}
                 @elseif(Auth::user()->role == 'student' &&
-                        null != DB::table('register_request')->select('id')->where('student_id', Auth::user()->id)->where('course_id', $listing->id)->get()->first())
+                        null !=
+                            DB::table('register_request')->select('id')->where('student_id', Auth::user()->id)->where('course_id', $listing->id)->get()->first())
                     <button class="block w-20 bg-slate-300	 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
                         type="submit" disabled>登録</button>
                     @php
@@ -46,20 +43,17 @@
                     @if ($request->status == 'rejected')
                         <button
                             class="right-30 block w-20 bg-red-500 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
-                            type="submit" disabled>拒否された</button>
+                            type="submit" disabled>拒否された
+                        </button>
                     @elseif($request->status == 'accepted')
                         <button
-                            class="right-30 block w-20 bg-green-500	 text-white mt-6 py-2 rounded-xl hover:opacity-80 font-bold""
+                            class="right-30 block w-20 bg-green-500	 text-white mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
                             type="submit" disabled>受け入れた
                         </button>
                     @elseif($request->status == 'pending')
                         <button
-                            class="right-30 block w-20 bg-yellow-200 text-whblackite mt-6 py-2 rounded-xl hover:opacity-80 font-bold""
-                            type="submit" disabled>確認中</button>
-                    @else
-                        <button
-                            class="right-30 block w-20 bg-slate-300	 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold""
-                            type="submit" disabled>
+                            class="right-30 block w-20 bg-yellow-200 text-whblackite mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
+                            type="submit" disabled>確認中
                         </button>
                     @endif
                 @endif

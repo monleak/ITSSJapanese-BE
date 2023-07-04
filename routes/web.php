@@ -22,10 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [CourseController::class,'index'])->middleware(['auth', 'verified'])->name('index');
 
 Route::controller(CourseController::class)->group(function () {
-    Route::get('/course', [CourseController::class, 'myCourse'])->middleware(['auth', 'verified'])->name('myCourse');
-    Route::get('/course/{listing}', 'show');
-    Route::post('/course/list', 'list');
-    Route::post('/course','create')->name('course.create');
+    Route::get('/course', 'myCourse')->middleware(['auth', 'verified'])->name('myCourse');
+    Route::get('/course/{listing}', 'show')->name('course.show');
+    Route::get('/course/create', 'create')->name('course.create');
+    Route::post('/course/store','store')->name('course.store');
     Route::patch('/course/{id}','update');
     Route::delete('/course/{id}','destroy');
 });

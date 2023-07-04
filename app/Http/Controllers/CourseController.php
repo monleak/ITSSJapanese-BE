@@ -79,13 +79,13 @@ class CourseController extends Controller
         return $data;
     }
 
-    public function create(CreateCourseRequest $request)
+    public function create()
     {
-        $course = Course::create($request->all());
-        return [
-            "status" => 200,
-            "data" => $course
-        ];
+        return view('course.create',[]);
+    }
+
+    public function store(CreateCourseRequest $request){
+
     }
 
     public function update(UpdateCourseRequest $request)

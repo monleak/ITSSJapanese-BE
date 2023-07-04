@@ -38,8 +38,6 @@ class Course extends Model
             if(isset($userIdByName)){
                 // $teacherIdByUserId = DB::table("teachers")->select('id')->where('user_id','like','%'.$userIdByName->id.'%')->get()->first();
                 $query->where('teacher_id','like','%'.$userIdByName->id.'%');
-                // print_r($userIdByName);
-                // print_r($teacherIdByUserId);
             }else{
                 /*
                 Find course by name or description or price
