@@ -40,7 +40,7 @@ Route::controller(TeacherController::class)->group(function () {
 });
 
 Route::controller(CourseAndStudentController::class)->group(function () {
-    Route::post('/addStudentToCourse','addStudentToCourse');
+    Route::post('/addStudentToCourse','addStudentToCourse')->name('student.join');
 })->middleware(['auth', 'verified'])->name('joinCourse');
 
 Route::controller(RegisterCourseController::class)->group(function () {

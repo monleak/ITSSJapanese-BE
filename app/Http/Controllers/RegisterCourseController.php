@@ -24,7 +24,7 @@ class RegisterCourseController extends Controller
         // }
         // // dd($request->tag);
         // else{
-        $requests = RegisterCourse::all();
+        $requests = RegisterCourse::where('status','pending');
         // dd($requests);
         return view('request.index',['request' => $requests]);
         
