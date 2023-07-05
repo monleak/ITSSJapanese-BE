@@ -16,7 +16,7 @@ $teacher = Teacher::find($item->teacher_id);
         />
         <div>
             <h3 class="text-2xl">
-                <a href="/course/{{$item->id}}">{{$item->name}}</a>
+                <a href="/listings/{{$item->id}}">{{$item->name}}</a>
             </h3>
             <div class="text-xl font-bold mb-1">
                 {{$teacher->fullname}}

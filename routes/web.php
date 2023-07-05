@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentCourseController;
 use App\Http\Controllers\CourseAndStudentController;
 use App\Http\Controllers\CourseController;
@@ -21,12 +21,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [CourseController::class,'index'])->middleware(['auth', 'verified'])->name('index');
+Route::get('/listings/{listing}', [CourseController::class,'show'])->name('course.show');
+Route::get('/createComment',[CommentController::class,'create'])->middleware(['auth', 'verified'])->name('comment.create');
+Route::post('/createComment',[CommentController::class,'store'])->middleware(['auth', 'verified'])->name('comment.store');
 
 Route::controller(CourseController::class)->group(function () {
-    Route::get('/course', [CourseController::class, 'myCourse'])->middleware(['auth', 'verified'])->name('myCourse');
-    Route::get('/course/{listing}', 'show');
-    Route::post('/course/list', 'list');
-    Route::post('/course','create')->name('course.create');
+    Route::get('/course', 'myCourse')->middleware(['auth', 'verified'])->name('myCourse');
+    // Route::resource('')
+    Route::get('/course/create', 'create')->name('course.create');
+    Route::post('/course/store','store')->name('course.store');
     Route::patch('/course/{id}','update');
     Route::delete('/course/{id}','destroy');
 });
@@ -40,10 +43,11 @@ Route::controller(TeacherController::class)->group(function () {
 });
 
 Route::controller(CourseAndStudentController::class)->group(function () {
-    Route::post('/addStudentToCourse','addStudentToCourse');
+    Route::post('/addStudentToCourse','addStudentToCourse')->name('student.join');
 })->middleware(['auth', 'verified'])->name('joinCourse');
 
 Route::controller(RegisterCourseController::class)->group(function () {
+    Route::get('/requests','index')->name('request.index');
     Route::post('/createRequest','createRequest')->middleware(['auth', 'verified'])->name('request.create');
     Route::post('/requestToCourse','requestToCourse');
     Route::post('/listRequest','listRequest');

@@ -104,7 +104,7 @@
         </div>
     </nav>
     <div class="flex justify-between mt-2 border-y border-grey">
-        <div class="mx-80 my-2 w-3/6 flex justify-between items-center flex justify-items-center text-sm">
+        <div class="mx-80 my-2 w-3/6 flex justify-between items-center justify-items-center text-sm">
             <a href="/businessTV">ビジネスベトナム語</a>
             <a href="/kaiwaTV">ベトナム語会話</a>
             <a href="/practice_NLTV">NLTVの練習風景</a>

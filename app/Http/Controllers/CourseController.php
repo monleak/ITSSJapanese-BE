@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Models\CommentAndCourse;
 use Hamcrest\Collection\IsEmptyTraversable;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use PHPUnit\Framework\Constraint\IsEmpty;
 
 class CourseController extends Controller
@@ -66,26 +68,42 @@ class CourseController extends Controller
     }
     // Show single course
     public function show(Course $listing)
-    {
+    {   
+        $comments = CommentAndCourse::all();
         return view('course.show', [
             //variable_name => values
-            'listing' => $listing
+            'listing' => $listing,
+            'comments' => $comments
         ]);
     }
-
+    public function create()
+    {
+        return(view('course.create'));
+    }
     public function list(Request $request)
     {
         $data = Course::all();
         return $data;
     }
 
-    public function create(CreateCourseRequest $request)
-    {
-        $course = Course::create($request->all());
-        return [
-            "status" => 200,
-            "data" => $course
-        ];
+
+
+    public function store(Request $request) {
+
+        $formField = $request->validate([
+            'course_name' => Rule::unique('courses', 'name'),
+        ]);
+        Course::create([
+            'name' => $_POST['course_name'] ,
+            'teacher_id' => $_POST['teacher_id'],
+            'level' => $_POST['course_level'],
+            'method' =>  ($_POST['course_method'] == 'online' ? 'online' : 'offline'),
+            'introduction' => $_POST['course_intro'],
+            'description' => $_POST['course_description'],
+            'price'=>$_POST['course_price']?$_POST['course_price']:0,
+        ]);        
+
+        return redirect('/course')->with('message', 'コース作成は成功でした !');
     }
 
     public function update(UpdateCourseRequest $request)
