@@ -13,11 +13,9 @@
             <div class="mt-4 mr-10 justify-items-end text-center absolute top-20 right-60">
                 <form action="{{ route('course.store') }}" method="post">
                     @csrf
-                    {{-- <input type="hidden" name="course_id" value="{{ $listing->id }}"> --}}
                     <input type="hidden" name="teacher_id" value="{{ Auth::user()->id }}">
                     <button class="block w-20 bg-teal-300 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold "
                         type="submit">編集</button>
-
             </div>
             <div class="flex flex-col items-start justify-center text-start">
 
@@ -33,7 +31,7 @@
                     </h2>
                 </div>
 
-                <div class="lex flex-col w-full mx-auto border-2">
+                <div class="flex flex-col w-full mx-auto border-2">
                     <div>
                         <label class="ml-2 my-2 font-semibold text-lg mb-4 " for="">レベル：</label>
                         @error('course_level')

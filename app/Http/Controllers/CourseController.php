@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Models\CommentAndCourse;
 use Hamcrest\Collection\IsEmptyTraversable;
 use Illuminate\Http\Request;
 use App\Models\Course;
@@ -67,10 +68,12 @@ class CourseController extends Controller
     }
     // Show single course
     public function show(Course $listing)
-    {
+    {   
+        $comments = CommentAndCourse::all();
         return view('course.show', [
             //variable_name => values
-            'listing' => $listing
+            'listing' => $listing,
+            'comments' => $comments
         ]);
     }
     public function create()

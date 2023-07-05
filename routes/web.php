@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseAndStudentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\RegisterCourseController;
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [CourseController::class,'index'])->middleware(['auth', 'verified'])->name('index');
 Route::get('/listings/{listing}', [CourseController::class,'show'])->name('course.show');
+Route::get('/createComment',[CommentController::class,'create'])->middleware(['auth', 'verified'])->name('comment.create');
+Route::post('/createComment',[CommentController::class,'store'])->middleware(['auth', 'verified'])->name('comment.store');
 
 Route::controller(CourseController::class)->group(function () {
     Route::get('/course', 'myCourse')->middleware(['auth', 'verified'])->name('myCourse');
