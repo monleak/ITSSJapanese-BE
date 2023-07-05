@@ -24,18 +24,9 @@ class RegisterCourseController extends Controller
         // }
         // // dd($request->tag);
         // else{
-        $input = RegisterCourse::all();
-        if(empty($input) || array_key_exists('search', $input)){
-            return view('course.course-index', [
-                // 'listings' => Listing::all()
-                'listings' => Course::latest()->filter(request(['search']))->get()
-            ]);
-        }else{
-            return view('course.course-index', [
-                // 'listings' => Listing::all()
-                'listings' => Course::latest()->filter($input)->get()
-            ]);
-        }
+        $requests = RegisterCourse::all();
+        // dd($requests);
+        return view('request.index',['request' => $requests]);
         
     }
     public function createRequest(Request $request)
