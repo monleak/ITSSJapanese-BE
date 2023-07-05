@@ -27,32 +27,34 @@
                 @elseif(Auth::user()->role == 'student' &&
                         null !=
                             DB::table('register_request')->select('id')->where('student_id', Auth::user()->id)->where('course_id', $listing->id)->get()->first())
-                    <button class="block w-20 bg-slate-300	 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
-                        type="submit" disabled>登録</button>
-                    @php
-                        $request = DB::table('register_request')
-                            ->select('*')
-                            ->where('student_id', Auth::user()->id)
-                            ->where('course_id', $listing->id)
-                            ->get()
-                            ->first();
-                    @endphp
-                    @if ($request->status == 'rejected')
-                        <button
-                            class="right-30 block w-20 bg-red-500 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
-                            type="submit" disabled>拒否された
-                        </button>
-                    @elseif($request->status == 'accepted')
-                        <button
-                            class="right-30 block w-20 bg-green-500	 text-white mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
-                            type="submit" disabled>受け入れた
-                        </button>
-                    @elseif($request->status == 'pending')
-                        <button
-                            class="right-30 block w-20 bg-yellow-200 text-whblackite mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
-                            type="submit" disabled>確認中
-                        </button>
-                    @endif
+                    <div class="flex flex-auto gap-2">
+                        @php
+                            $request = DB::table('register_request')
+                                ->select('*')
+                                ->where('student_id', Auth::user()->id)
+                                ->where('course_id', $listing->id)
+                                ->get()
+                                ->first();
+                        @endphp
+                        @if ($request->status == 'rejected')
+                            <button
+                                class="right-30 block w-20 bg-red-500 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
+                                type="submit" disabled>拒否された
+                            </button>
+                        @elseif($request->status == 'accepted')
+                            <button
+                                class="right-30 block w-20 bg-green-500	 text-white mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
+                                type="submit" disabled>受け入れた
+                            </button>
+                        @elseif($request->status == 'pending')
+                            <button
+                                class="right-30 block w-20 bg-yellow-200 text-whblackite mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
+                                type="submit" disabled>確認中
+                            </button>
+                        @endif
+                        <button class="block w-20 bg-slate-300	 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold"
+                            type="submit" disabled>登録</button>
+                    </div>
                 @endif
             </div>
             <div class="flex flex-col items-start justify-center text-start">
@@ -105,7 +107,7 @@
                         <div class="p-2 m-2 ml-5 w-5/6 h-32">{{ $listing->description }}</div>
                     </div>
                     <h2 class="text-2xl mb-2">
-                        <div class="text-xl font-bold mb-4">教師 : {{ $teacher->fullname }}</div>
+                        <div class="text-xl font-bold mb-4 ">教師 : <a class= "hover:text-red-500"href= "teacher/{{$teacher->id}}">{{ $teacher->fullname }}</a></div>
                     </h2>
                 </div>
                 <div class="border border-gray-200 w-full">
@@ -126,6 +128,7 @@
                         </h3>
                         <div class="justify-items-end">
                             <form action="/createComment" method="get" class=" ml-72">
+                                <input type="hidden" name="course_id" value="{{ $listing->id }}">
                                 <button
                                     class="block w-20 bg-yellow-300 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold "
                                     type="submit">追加</button>
@@ -146,45 +149,24 @@
                                             <div
                                                 class="border-b border-black justify-items-stretch flex-auto grid gap-auto grid-cols-2 grid-rows-1">
                                                 <div class="ml-9 flex items-center space-x-3">
-                                                    @for($i = $comment->rating; $i > 0; $i--)
-                                                    <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                                    </svg>
-                                                    @endfor                                                
+                                                    @for ($i = $comment->rating; $i > 0; $i--)
+                                                        <svg class="w-4 h-4 text-yellow-300" aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                            viewBox="0 0 22 20">
+                                                            <path
+                                                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                        </svg>
+                                                    @endfor
                                                 </div>
                                                 <div class="ml-10 text-xl font-bold my-2">
                                                     時間：　{{ $comment->created_at }}</div>
                                             </div>
                                             <div class="pl-5 text-xl py-10 border border-black">
-                                                {{$comment->content}}
+                                                {{ $comment->content }}
                                             </div>
                                         </td>
-                                        {{-- <td class="{{ $tdClass }}">{{ $item->teacher_name }}</td> --}}
-                                        <td class="text-center my-5 gap-2 flex justify-center">
-                                            {{-- <form id="requestHandler" action="{{ route('student.join') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="course_id" value="{{ $item->course_id }}">
-                                        <input type="hidden" name="student_id" value="{{ $item->student_id }}">
-                                        <input type="hidden" id="status" name="status" value="">
-                                        <a href="#"
-                                            onclick="document.getElementById('status').value = 'accepted';
-                                        document.getElementById('requestHandler').submit();"
-                                            class="btn btn-xs btn-info pull-right">
-                                            <img src="{{ asset('images/accept.png') }}" alt=""
-                                                class="inline w-15 h-15 rounded-full">
-                                        </a>
-                                        <a href="#"
-                                            onclick="document.getElementById('status').value = 'rejected';
-                                        document.getElementById('requestHandler').submit();"
-                                            class="btn btn-xs btn-info pull-right">
-                                            <img src="{{ asset('images/reject.png') }}" alt=""
-                                                class="inline w-15 h-15 rounded-full">
-                                        </a>
-                                    </form> --}}
-                                        </td>
                                     </tr>
-                                    @endforeach
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
