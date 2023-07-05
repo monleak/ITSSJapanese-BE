@@ -1,6 +1,6 @@
 <?php
-
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentCourseController;
 use App\Http\Controllers\CourseAndStudentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\RegisterCourseController;
@@ -51,6 +51,11 @@ Route::controller(RegisterCourseController::class)->group(function () {
     Route::post('/createRequest','createRequest')->middleware(['auth', 'verified'])->name('request.create');
     Route::post('/requestToCourse','requestToCourse');
     Route::post('/listRequest','listRequest');
+});
+
+Route::controller(CommentCourseController::class)->group(function () {
+    Route::get('/getComment','list');
+    Route::post('/createComment','createComment');
 });
 
 
