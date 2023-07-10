@@ -54,7 +54,6 @@ Route::controller(RegisterCourseController::class)->group(function () {
 
 Route::controller(CommentCourseController::class)->group(function () {
     Route::get('/getComment','list');
-    Route::post('/createComment','createComment');
 });
 
 
