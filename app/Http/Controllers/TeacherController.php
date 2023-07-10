@@ -27,7 +27,7 @@ class TeacherController extends Controller
         return view('teacher.contact_info');
     }
     public function list(Request $request){
-        $data = Teacher::all();
+        $data = Teacher::all()->paginate(3);
         return $data;
     }
 

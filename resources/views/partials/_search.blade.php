@@ -48,13 +48,6 @@
                 </div>
                 <span class="ml-3 text-sm text-gray-900 font-semibold">オンライン</span>
             </label>
-
-
-
-            {{-- <div class=" my-5 absolute inset-y-0 right-5 ">
-                <input type="text" name="search"
-                    class="border-2 border-black h-10 w-50 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none" placeholder="検索もの" />
-            </div> --}}
             <div class="my-5 absolute inset-y-0 right-10">
                 <button type="submit" class="h-10 w-20 text-white rounded-lg bg-black hover:bg-red-600">
                     検索

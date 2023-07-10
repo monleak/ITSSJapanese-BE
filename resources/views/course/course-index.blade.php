@@ -17,12 +17,14 @@
                     <x-listing-card :item="$item" />
                 @endforeach
             @endif
+
         </div>
         <div class="text-4xl font-bold uppercase my-5">勉強しましょう！</div>
         <div class="justify-items-center lg:grid lg:grid-cols-3 gap-4 space-y-4 md:space-y-0 mx-4">
             <div class="bg-gray-50 border border-gray-200 rounded p-6">
                 <div class="flex ">
-                    <img class="object-fill w-48 h-48 mr-6 md:block" src="{{ asset('images/schedule.jpg') }}" alt="" />
+                    <img class="object-fill w-48 h-48 mr-6 md:block" src="{{ asset('images/schedule.jpg') }}"
+                        alt="" />
                     <div class="table-cell">
                         <h3 class="text-2xl">
                             スケジュール

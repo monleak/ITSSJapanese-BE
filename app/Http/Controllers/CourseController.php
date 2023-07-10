@@ -55,12 +55,10 @@ class CourseController extends Controller
         $input = $request->all();
         if(empty($input) || array_key_exists('search', $input)){
             return view('course.course-index', [
-                // 'listings' => Listing::all()
                 'listings' => Course::latest()->filter(request(['search']))->get()
             ]);
         }else{
             return view('course.course-index', [
-                // 'listings' => Listing::all()
                 'listings' => Course::latest()->filter($input)->get()
             ]);
         }
@@ -69,7 +67,7 @@ class CourseController extends Controller
     // Show single course
     public function show(Course $listing)
     {   
-        $comments = CommentAndCourse::where('id_course',$listing->id)->latest()->get();
+        $comments = CommentAndCourse::where('id_course',$listing->id)->latest()->paginate(3);
         return view('course.show', [
             //variable_name => values
             'listing' => $listing,

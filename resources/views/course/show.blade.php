@@ -5,6 +5,8 @@
         use App\Models\Student;
         use App\Models\Teacher;
         use App\Models\User;
+        use Illuminate\Pagination\LengthAwarePaginator;
+        
         $teacher = Teacher::find($listing->teacher_id);
         
     @endphp
@@ -60,7 +62,7 @@
             <div class="flex flex-col items-start justify-center text-start">
 
                 <div class="flex justify-items-stretch">
-                    <h2 class="ml-10 text-3xl font-bold mb-5">
+                    <h2 class="text-3xl font-bold mb-5">
                         {{ $listing->name }}
                     </h2>
                 </div>
@@ -90,40 +92,43 @@
                         @enderror
                     </div>
                     <div>
-                        <label class="ml-2 my-3 font-semibold text-lg mb-4" for="">コースのメソッド :
+                        <label class="ml-2 my-3 font-semibold text-lg mb-4" for="">メソッド :
                             {{ $listing->method }}</label>
+                    </div>
+                    <div>
+                        <label class="ml-2 my-3 font-semibold text-lg mb-4" for="">教師 : <a
+                                class="hover:text-red-500"
+                                href="/teacher/{{ $teacher->id }}">{{ $teacher->fullname }}</a>
+                    </div>
+                </div>
 
-                    </div>
-
+            </div>
+            <div class=" border-gray-200 w-full mb-6">
+                <h3 class="text-3xl font-bold mb-4 mt-5">
+                    コースの内容
+                </h3>
+                <div class="border border-gray-200 w-full mb-6 items-start">
+                    @error('course_description')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                    <div class="p-2 m-2 ml-5 w-5/6 h-32">{{ $listing->description }}</div>
                 </div>
-                <div class=" border-gray-200 w-full mb-6">
-                    <h3 class="ml-10 text-3xl font-bold mb-4 mt-5">
-                        コースの内容
-                    </h3>
-                    <div class="border border-gray-200 w-full mb-6 items-start">
-                        @error('course_description')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                        <div class="p-2 m-2 ml-5 w-5/6 h-32">{{ $listing->description }}</div>
-                    </div>
-                    <h2 class="text-2xl mb-2">
-                        <div class="text-xl font-bold mb-4 ">教師 : <a class= "hover:text-red-500" href= "/teacher/{{$teacher->id}}">{{ $teacher->fullname }}</a></div>
-                    </h2>
+            </div>
+            <div class=" border-gray-200 w-full">
+                <h3 class="text-3xl font-bold mb-4 mt-5">
+                    説明
+                </h3>
+                <div class="border border-gray-200 w-full mb items-center">
+                    @error('course_intro')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                    <div class="p-2 rounded-md m-2 ml-11 w-5/6 h-32"></div>
                 </div>
-                <div class=" border-gray-200 w-full">
-                    <h3 class="ml-10 text-3xl font-bold mb-4 mt-5">
-                        説明
-                    </h3>
-                    <div class="border border-gray-200 w-full mb items-center">
-                        @error('course_intro')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                        <div class="p-2 rounded-md m-2 ml-11 w-5/6 h-32"></div>
-                    </div>
-                </div>
+            </div>
+            @if (Auth::user()->role == 'student')
                 <div class=" border-gray-200 w-full flex-col">
                     <div class="justify-items-stretch flex-auto grid gap-auto grid-cols-2 grid-rows-1">
-                        <h3 class="ml-10 text-3xl font-bold mb-4 mt-5">
+                        <h3 class="text-3xl font-bold mb-4 mt-5">
                             コメント
                         </h3>
                         <div class="justify-items-end">
@@ -170,8 +175,50 @@
                             </tbody>
                         </table>
                     </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="inline-flex -space-x-px text-sm">
+                            @if ($comments->onFirstPage())
+                                <li>
+                                    <div
+                                        class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        前のページ</div>
+                                </li>
+                            @else
+                                <li>
+                                    <a href={{ $comments->previousPageUrl() }}
+                                        class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">前のページ</a>
+                                </li>
+                            @endif
+                            <li>
+                                <a href="#"
+                                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
+                            </li>
+                            <li>
+                                <a href={{ $comments->url($comments->currentPage()) }} aria-current="page"
+                                    class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+                                    {{ $comments->currentPage() }}</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
+                            </li>
+                            @if ($comments->onLastPage())
+                                <li>
+                                    <div
+                                        class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        次のページ</div>
+                                </li>
+                            @else
+                                <li>
+                                    <a href={{ $comments->nextPageUrl() }}
+                                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">次のページ</a>
+                                </li>
+                            @endif
+
+                        </ul>
+                    </nav>
                 </div>
-            </div>
+            @endif
         </x-card>
     </div>
 @endsection
