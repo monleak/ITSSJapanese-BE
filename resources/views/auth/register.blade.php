@@ -5,9 +5,7 @@
                 <h1>Ichiichi sensei</h1>
             <p>HEDSPI の主要な学習アプリ</p>
             <span>
-                <p>login with social media</p>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
+                <br><br><br><br>
             </span>
             </div>
         </div>
