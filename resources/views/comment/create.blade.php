@@ -2,7 +2,8 @@
 @section('content')
     @php
         use App\Models\Student;
-        $student = Student::find(Auth::user()->id); 
+        $student = Student::find(Auth::user()->id);
+        // dd($student)
     @endphp
     <div class="mx-64">
         <x-card class="p-10">
@@ -25,15 +26,15 @@
                         @error('content')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
-                        <input class="border border-black p-2 rounded-md m-2 ml-11 w-5/6 h-32" type="text"
-                            name="content" placeholder="コメント" required>
+                        <input class="border border-black p-2 rounded-md m-2 ml-11 w-5/6 h-32" type="text" name="content"
+                            placeholder="コメント" required>
                         <div class="ml-11">
                             <label class=" my-2 font-semibold text-lg mb-4" for="">評価：</label>
                             @error('rating')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
-                            <input class="border border-black p-2 rounded-md m-2 ml-11 w-1/3" type="number"
-                            name="rating" placeholder="星の数" required>
+                            <input class="border border-black p-2 rounded-md m-2 ml-11 w-1/3" type="number" name="rating"
+                                placeholder="星の数" required>
                         </div>
                     </div>
                     <div class="justify-center text-center items-center">

@@ -15,12 +15,14 @@ class CourseAndStudentController extends Controller
                 'course_id' => $_POST['course_id'] ,
                 'student_id' => $_POST['student_id'],
                 'progress' => 0,
-            ]);  
-            
-            return redirect('/requests')->with('message', '操作が成功でした !');
+            ]);
+            RegisterCourse::where('course_id', $_POST['course_id'])
+            ->where('student_id', $_POST['student_id'])->update(['status'=>'accepted']);
+            return redirect('/requests')->with('message', '受け取りました。');
         }else{
+            RegisterCourse::where('course_id', $_POST['course_id'])
+            ->where('student_id', $_POST['student_id'])->update(['status'=>'rejected']);
             return redirect('/requests')->with('message', '操作が成功でした !');
-
         }
               
 

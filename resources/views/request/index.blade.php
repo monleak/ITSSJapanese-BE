@@ -8,22 +8,20 @@ Dong y / Tu choi --}}
     @php
         use App\Models\Course;
         use App\Models\Student;
-        // $course_name[] = [];
-        // $student[] = [];
+        // dd($request);
         foreach ($request as $value) {
             # code...
             $course_name[$value->id] = Course::where('id', $value->course_id)->value('name');
             $student[$value->id] = Student::find($value->student_id)->fullname;
         }
-        // dd($student)
     @endphp
     <div class="mx-64 my-5">
         <x-card class="p-10">
-            @if (isset($request))
+            {{-- @if (isset($request))
                 <div class="text-2xl font-bold">
                     リクエストがなし
                 </div>
-            @else
+            @else --}}
                 <div class="flex flex-col justify-center items-center mt-4">
                     <h1 class="mb-2 text-4xl">リクエストのリクエスト</h1>
                 </div>
@@ -43,15 +41,12 @@ Dong y / Tu choi --}}
                                         {{ $student[$item->id] }}さんはあなたの{{ $course_name[$item->id] }}に受けたいです。
                                     </div>
                                 </td>
-                                {{-- <td class="{{ $tdClass }}">{{ $item->teacher_name }}</td> --}}
                                 <td class="text-center my-5 gap-2 flex justify-center">
                                     <form id="requestHandler" action="{{ route('student.join') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="course_id" value="{{ $item->course_id }}">
                                         <input type="hidden" name="student_id" value="{{ $item->student_id }}">
                                         <input type="hidden" id="status" name="status" value="">
-                                        {{-- <button class="block w-20 bg-teal-300 text-black mt-6 py-2 rounded-xl hover:opacity-80 font-bold "
-                        type="submit">編集</button> --}}
                                         <a href="#"
                                             onclick="document.getElementById('status').value = 'accepted';
                                         document.getElementById('requestHandler').submit();"
@@ -72,7 +67,7 @@ Dong y / Tu choi --}}
                         @endforeach
                     </tbody>
                 </table>
-            @endif
+            {{-- @endif --}}
 
         </x-card>
     </div>

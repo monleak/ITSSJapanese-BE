@@ -96,7 +96,7 @@
                     </div>
 
                 </div>
-                <div class="border border-gray-200 w-full mb-6">
+                <div class=" border-gray-200 w-full mb-6">
                     <h3 class="ml-10 text-3xl font-bold mb-4 mt-5">
                         コースの内容
                     </h3>
@@ -107,10 +107,10 @@
                         <div class="p-2 m-2 ml-5 w-5/6 h-32">{{ $listing->description }}</div>
                     </div>
                     <h2 class="text-2xl mb-2">
-                        <div class="text-xl font-bold mb-4 ">教師 : <a class= "hover:text-red-500"href= "teacher/{{$teacher->id}}">{{ $teacher->fullname }}</a></div>
+                        <div class="text-xl font-bold mb-4 ">教師 : <a class= "hover:text-red-500" href= "/teacher/{{$teacher->id}}">{{ $teacher->fullname }}</a></div>
                     </h2>
                 </div>
-                <div class="border border-gray-200 w-full">
+                <div class=" border-gray-200 w-full">
                     <h3 class="ml-10 text-3xl font-bold mb-4 mt-5">
                         説明
                     </h3>
@@ -121,7 +121,7 @@
                         <div class="p-2 rounded-md m-2 ml-11 w-5/6 h-32"></div>
                     </div>
                 </div>
-                <div class="border border-gray-200 w-full flex-col">
+                <div class=" border-gray-200 w-full flex-col">
                     <div class="justify-items-stretch flex-auto grid gap-auto grid-cols-2 grid-rows-1">
                         <h3 class="ml-10 text-3xl font-bold mb-4 mt-5">
                             コメント

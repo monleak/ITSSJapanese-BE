@@ -22,9 +22,9 @@ class TeacherController extends Controller
     // created_at		
     // updated_at		
 
-    public function show($id){
-        $teacher = Teacher::find($id);
-        return $teacher;
+    public function show(){
+        // $teacher = Teacher::find($id);
+        return view('teacher.contact_info');
     }
     public function list(Request $request){
         $data = Teacher::all();
