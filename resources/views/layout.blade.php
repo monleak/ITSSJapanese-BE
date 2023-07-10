@@ -86,9 +86,11 @@
                     <x-dropdown-link :href="route('profile.edit')">
                         {{ __('プロフィール') }}
                     </x-dropdown-link>
+                    @if(Auth::user()->role == 'teacher')
                     <x-dropdown-link :href="route('myCourse')">
                         {{ __('コース管理') }}
                     </x-dropdown-link>
+                    @endif
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
