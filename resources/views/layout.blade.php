@@ -22,6 +22,8 @@
             },
         };
     </script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    @stack('other-scripts')
     <title>ichisensei</title>
 </head>
 
@@ -74,8 +76,8 @@
                 type="button">
                 <i class="fa-sharp fa-solid fa-user mr-1"></i>
                 {{ Auth::user()->name }} <span class="caret"></span>
-                <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
@@ -86,14 +88,16 @@
                     <x-dropdown-link :href="route('profile.edit')">
                         {{ __('プロフィール') }}
                     </x-dropdown-link>
-                    <x-dropdown-link :href="route('myCourse')">
-                        {{ __('コース管理') }}
-                    </x-dropdown-link>
+                    @if (Auth::user()->role == 'teacher')
+                        <x-dropdown-link :href="route('myCourse')">
+                            {{ __('コース管理') }}
+                        </x-dropdown-link>
+                    @endif
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
                         <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
+                            onclick="event.preventDefault();
                                             this.closest('form').submit();">
                             {{ __('ログアウト') }}
                         </x-dropdown-link>

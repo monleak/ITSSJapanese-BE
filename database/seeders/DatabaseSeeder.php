@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'student'
         ]);
         Student::create([
-            'id'=>1,
+            'id'=>2,
             'user_id'=>2,
             'email' => "student@gmail.com",
             'fullname' => 'Tran Minh Quan',
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
             'designation' => 'Ha Noi'
         ]);
         Student::create([
-            'id'=>2,
+            'id'=>3,
             'user_id'=>3,
 
             'email' => "student2@gmail.com",
@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
             'designation' => 'Ha Noi'
         ]);
         Student::create([
-            'id'=>3,
+            'id'=>4,
             'user_id'=>4,
 
             'email' => "student3@gmail.com",

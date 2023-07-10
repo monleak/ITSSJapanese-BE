@@ -71,7 +71,6 @@ class Course extends Model
             }else{
                 $query->where('method','like','offline');
             }
-            // dd($query);
         }
         // dd($filter);
         
