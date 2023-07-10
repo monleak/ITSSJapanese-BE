@@ -17,7 +17,6 @@
                         <x-listing-card :item="$item" />
                     @endforeach
                 @endif
-                <a href={{route('course.create')}}><img class="h-48 w-48 justitfy-items-center" src="../../images/add.png"></a>
             </div>
         </div>
     </div>

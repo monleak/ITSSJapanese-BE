@@ -3,7 +3,8 @@
         <div class="flex justify-start font-semibold">
             <div
                 class="mr-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-15 p-2.5">
-                <select data-filter="make" class="border-none bg-grey-50 filter-make filter form-control" name="level">
+                <select data-filter="make" class=" bg-gray-50 border-none bg-grey-50 filter-make filter form-control"
+                    name="level">
                     <option selected value="#">レベル</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
@@ -12,8 +13,8 @@
             </div>
             <div
                 class="mr-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-15 p-2.5">
-                <select data-filter="make" class="border-none bg-grey-50 filter-make filter form-control" name="exp"
-                    label="経験年数">
+                <select data-filter="make" class=" bg-gray-50 border-none bg-grey-50 filter-make filter form-control"
+                    name="exp" label="経験年数">
                     <option selected value="#">経験年数</option>
                     <option value="<=5">0-5年数</option>
                     <option value=">5">> 5年数</option>
@@ -21,7 +22,7 @@
             </div>
             <div
                 class="mr-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-15 p-2.5">
-                <select data-filter="make" class="border-none bg-grey-50 filter-make filter form-control"
+                <select data-filter="make" class=" bg-gray-50 border-none bg-grey-50 filter-make filter form-control"
                     name="city">
                     <option selected value="#">都市</option>
                     <option value="Ha Noi">Ha Noi</option>
@@ -31,7 +32,7 @@
             </div>
             <div
                 class="mr-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-15 p-2.5">
-                <select data-filter="make" class="border-none bg-grey-50 filter-make filter form-control"
+                <select data-filter="make" class="  bg-gray-50 border-none bg-grey-50 filter-make filter form-control"
                     name="price">
                     <option selected value="#">値段</option>
                     <option value="<= 200000">{{ '0-20万' }}</option>
@@ -58,8 +59,24 @@
                 <input type="text" name="search"
                     class="border-2 border-black h-10 w-50 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none" placeholder="検索もの" />
             </div> --}}
+            <div class="my-5 absolute inset-y-0 right-72">
+                <a class="group flex" href={{ route('course.create') }}><img
+                        class="h-10 w-10 justitfy-items-center rounded-full" src="../../images/add.png" alt="コースを追加">
+                    <div
+                        class="transition-all transform
+                        translate-y-8 opacity-0
+                        group-hover:opacity-100
+                        group-hover:translate-y-0">
+                        <div class="p-2">
+                            <p class="text-lg text-red-400">
+                                コースを追加.
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
             <div class="my-5 absolute inset-y-0 right-44">
-                <a href={{route('request.index')}}
+                <a href={{ route('request.index') }}
                     class="pt-2 text-center block w-24 h-10 text-white bg-black hover:bg-cyan-400 rounded-lg  focus:ring-blue-300 
                     dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     リクエスト</a>
