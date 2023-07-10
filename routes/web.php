@@ -1,6 +1,6 @@
 <?php
-
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentCourseController;
 use App\Http\Controllers\CourseAndStudentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\RegisterCourseController;
@@ -52,13 +52,19 @@ Route::controller(RegisterCourseController::class)->group(function () {
     Route::post('/listRequest','listRequest');
 });
 
+Route::controller(CommentCourseController::class)->group(function () {
+    Route::get('/getComment','list');
+    Route::post('/createComment','createComment');
+});
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'edit2'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

@@ -64,8 +64,11 @@ class TeacherController extends Controller
 
     public function destroy($id){
         $teacher = Teacher::find($id);
-        $teacher->delete();
-
-        return "done";
+        if($teacher){
+            $teacher->delete();
+            return "done";
+        }else{
+            return "khong tim thay";
+        }
     }
 }
