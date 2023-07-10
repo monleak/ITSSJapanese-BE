@@ -14,13 +14,19 @@ class CommentController extends Controller
     }
 
     public function store(Request $request){
-        CommentAndCourse::create([
-            'id_student' => $_POST['student_id'] ,
-            'id_course' => $_POST['course_id'],
-            'content' => $_POST['content'],
-            'rating' =>  $_POST['rating'],
-        ]);        
-
+        $validated = $request->validate([
+            'rating' => 'min:1'
+        ]);
+        // dd($request);
+        // dd($validated);
+        if($validated){
+            CommentAndCourse::create([
+                'id_student' => $_POST['student_id'] ,
+                'id_course' => $_POST['course_id'],
+                'content' => $_POST['content'],
+                'rating' =>  $_POST['rating'],
+            ]);   
+        }
         return redirect('/listings/'.$_POST['course_id'])->with('message', 'コメントを追加することができました !');
     }
     //

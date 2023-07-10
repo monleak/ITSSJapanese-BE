@@ -69,7 +69,7 @@ class CourseController extends Controller
     // Show single course
     public function show(Course $listing)
     {   
-        $comments = CommentAndCourse::where('id_course',$listing->id)->get();
+        $comments = CommentAndCourse::where('id_course',$listing->id)->latest()->get();
         return view('course.show', [
             //variable_name => values
             'listing' => $listing,
