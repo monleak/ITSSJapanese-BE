@@ -44,20 +44,20 @@ class CourseController extends Controller
 
     }
     public function index(Request $request)
-    {
-        // if(isset(Auth::user()->role)&&(Auth::user()->role == 'teacher')){
-        //     return view('course.course-index',[
-        //         'listings'=> Course::latest()->filter(request(['search']))->get()
-        //     ]);
-        // }
-        // // dd($request->tag);
-        // else{
+    {   
+        // dd($request->all());
         $input = $request->all();
-        if(empty($input) || array_key_exists('search', $input)){
+        if(empty($input) ){
+            return view('course.course-index', [
+                'listings' => Course::latest()->get()
+            ]);
+        }
+        if(array_key_exists('search', $input)){
             return view('course.course-index', [
                 'listings' => Course::latest()->filter(request(['search']))->get()
             ]);
-        }else{
+        }
+        if(array_key_exists('level', $input)){
             return view('course.course-index', [
                 'listings' => Course::latest()->filter($input)->get()
             ]);

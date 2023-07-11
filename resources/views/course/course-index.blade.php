@@ -10,7 +10,7 @@
             {{-- echo = {{}} --}}
 
             @if (count($listings) == 0)
-                <p>No course available</p>
+                <p>コースがなし</p>
             @else
                 @foreach ($listings as $item)
                     {{-- pass $listing to listing => have to use prefix : --}}
@@ -79,7 +79,7 @@
                 $teachers = Teacher::latest()->paginate(2);
             @endphp
             @if (count($teachers) == 0)
-                <p>No teachers available</p>
+                <p>教師がなし</p>
             @else
                 @foreach ($teachers as $item)
                     {{-- pass $listing to listing => have to use prefix : --}}

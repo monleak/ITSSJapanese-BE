@@ -24,7 +24,7 @@ Route::get('/', [CourseController::class,'index'])->middleware(['auth', 'verifie
 Route::get('/listings/{listing}', [CourseController::class,'show'])->name('course.show');
 Route::get('/createComment',[CommentController::class,'create'])->middleware(['auth', 'verified'])->name('comment.create');
 Route::post('/createComment',[CommentController::class,'store'])->middleware(['auth', 'verified'])->name('comment.store');
-Route::get('listings/teacher/1',[TeacherController::class,'show'])->name('teacher.contact');
+Route::get('listings/teacher/{id}',[TeacherController::class,'show'])->name('teacher.contact');
 Route::controller(CourseController::class)->group(function () {
     Route::get('/course', 'myCourse')->middleware(['auth', 'verified'])->name('myCourse');
     Route::get('/course/create', 'create')->name('course.create');

@@ -31,11 +31,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('other-scripts')
 </head>
-@php
-    use App\Models\Teacher;
-    $teacher = Teacher::find(Auth::user()->id);
-    
-@endphp
+
 
 <body>
     <nav class="bg-white text-slate-900 border-gray-200 px-2 sm:px-4 pt-2.5 pb-1 flex items-center">
@@ -79,7 +75,7 @@
                 class="text-black hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 type="button">
                 <i class="fa-sharp fa-solid fa-user mr-1"></i>
-                {{ Auth::user()->name }} <span class="caret"></span>
+                {{ $teacher->name }} <span class="caret"></span>
                 <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -126,8 +122,8 @@
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
                         width="150px"
                         src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
-                        class="font-weight-bold">{{ Auth::user()->name }}</span><span
-                        class="text-black-50">{{ Auth::user()->email }}</span><span> </span></div>
+                        class="font-weight-bold">{{ $teacher->fullname }}</span><span
+                        class="text-black-50">{{ $teacher->email }}</span><span> </span></div>
             </div>
             <div class="col-md-5 border-right">
                 <div class="p-3 py-5">
@@ -136,7 +132,7 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-12"><label class="labels font-semibold">名前</label><input type="text"
-                                class="form-control text-black" value="{{ Auth::user()->name }}" disabled></div>
+                                class="form-control text-black" value="{{ $teacher->fullname }}" disabled></div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12"><label class="labels"><svg class="w-10 h-10"
@@ -145,7 +141,8 @@
                                     <path fill="#03A9F4"
                                         d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429" />
                                 </svg>
-                            </label><input type="text" class="form-control" value="{{$teacher->twitter}}" disabled></div>
+                            </label><input type="text" class="form-control" value="{{ $teacher->twitter }}"
+                                disabled></div>
                         <div class="col-md-12"><label class="labels"><svg class="w-10 h-10"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="96px"
                                     height="96px">
@@ -154,7 +151,8 @@
                                     <path fill="#fff"
                                         d="M35.926,17.488L29.414,24l6.511,6.511C35.969,30.347,36,30.178,36,30V18 C36,17.822,35.969,17.653,35.926,17.488z M26.688,23.899l7.824-7.825C34.347,16.031,34.178,16,34,16H14 c-0.178,0-0.347,0.031-0.512,0.074l7.824,7.825C22.795,25.38,25.205,25.38,26.688,23.899z M24,27.009 c-1.44,0-2.873-0.542-3.99-1.605l-6.522,6.522C13.653,31.969,13.822,32,14,32h20c0.178,0,0.347-0.031,0.512-0.074l-6.522-6.522 C26.873,26.467,25.44,27.009,24,27.009z M12.074,17.488C12.031,17.653,12,17.822,12,18v12c0,0.178,0.031,0.347,0.074,0.512 L18.586,24L12.074,17.488z" />
                                 </svg>
-                            </label><input type="text" class="form-control" value="{{$teacher->email}}" disabled></div>
+                            </label><input type="text" class="form-control" value="{{ $teacher->email }}"
+                                disabled></div>
                         <div class="col-md-12"><label class="labels"> <svg class="w-10 h-10"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="96px"
                                     height="96px">
@@ -162,7 +160,8 @@
                                     <path fill="#fff"
                                         d="M26.572,29.036h4.917l0.772-4.995h-5.69v-2.73c0-2.075,0.678-3.915,2.619-3.915h3.119v-4.359c-0.548-0.074-1.707-0.236-3.897-0.236c-4.573,0-7.254,2.415-7.254,7.917v3.323h-4.701v4.995h4.701v13.729C22.089,42.905,23.032,43,24,43c0.875,0,1.729-0.08,2.572-0.194V29.036z" />
                                 </svg>
-                            </label><input type="text" class="form-control" value="{{$teacher->facebook}}" disabled></div>
+                            </label><input type="text" class="form-control" value="{{ $teacher->facebook }}"
+                                disabled></div>
                         <div class="col-md-12"><label class="labels"><svg class="w-10 h-10"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="96px"
                                     height="96px">
@@ -179,7 +178,7 @@
                                         d="M21.25,18h-8v1.5h5.321L13,26h0.026c-0.163,0.211-0.276,0.463-0.276,0.75V27h7.5	c0.276,0,0.5-0.224,0.5-0.5v-1h-5.321L21,19h-0.026c0.163-0.211,0.276-0.463,0.276-0.75V18z" />
                                 </svg>
                             </label>
-                            <input type="text" class="form-control" value="{{$teacher->zalo}}" disabled>
+                            <input type="text" class="form-control" value="{{ $teacher->zalo }}" disabled>
                         </div>
                         <div class="col-md-12"><label class="labels"><svg class="w-10 h-10"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="96px"
@@ -189,7 +188,8 @@
                                     <path fill="#fff"
                                         d="M35.45,31.041l-4.612-3.051c-0.563-0.341-1.267-0.347-1.836-0.017c0,0,0,0-1.978,1.153	c-0.265,0.154-0.52,0.183-0.726,0.145c-0.262-0.048-0.442-0.191-0.454-0.201c-1.087-0.797-2.357-1.852-3.711-3.205	c-1.353-1.353-2.408-2.623-3.205-3.711c-0.009-0.013-0.153-0.193-0.201-0.454c-0.037-0.206-0.009-0.46,0.145-0.726	c1.153-1.978,1.153-1.978,1.153-1.978c0.331-0.569,0.324-1.274-0.017-1.836l-3.051-4.612c-0.378-0.571-1.151-0.722-1.714-0.332	c0,0-1.445,0.989-1.922,1.325c-0.764,0.538-1.01,1.356-1.011,2.496c-0.002,1.604,1.38,6.629,7.201,12.45l0,0l0,0l0,0l0,0	c5.822,5.822,10.846,7.203,12.45,7.201c1.14-0.001,1.958-0.248,2.496-1.011c0.336-0.477,1.325-1.922,1.325-1.922	C36.172,32.192,36.022,31.419,35.45,31.041z" />
                                 </svg>
-                            </label><input type="text" class="form-control" value="{{$teacher->phoneNumber}}" disabled></div>
+                            </label><input type="text" class="form-control" value="{{ $teacher->phoneNumber }}"
+                                disabled></div>
                     </div>
                 </div>
             </div>
