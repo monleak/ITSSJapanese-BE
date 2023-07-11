@@ -13,14 +13,14 @@
 
         <div class="right">
             <br>
-            <h5>Register</h5>
+            <h5>登録</h5>
             <br><br>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
                 <!-- Name -->
                 <div>
-                    <x-input-label for="name" :value="__('Name')" />
+                    <x-input-label for="name" :value="__('名前')" />
                     <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"
                         required autofocus autocomplete="name" />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -28,28 +28,24 @@
 
                 <!-- Email Address -->
                 <div class="mt-4">
-                    <x-input-label for="email" :value="__('Email')" />
+                    <x-input-label for="email" :value="__('メール')" />
                     <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
                         :value="old('email')" required autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
                 <!-- Role-->
-                <div class="mt-4 flex w-2 gap-10 justify-start ">
-                    <div for="role" :value="__('Role')">Role</div>
-                    <div class="flex w-2">
-                        <div class="w-full text-2xl" for="teacher">教師</div>
-                        <input id="teacher" type="radio" class="border-2 items-center rounded-full" name="role"
-                            required checked value="teacher"/>
-                    </div>
-                    <div class="w-full text-2xl h-2" for="student">学生</div>
-                    <div class="flex w-2">
-                        <input id="student" type="radio" class=" border-2 items-center rounded-full" name="role" value="student"/>
-                    </div>
-                    <br>
+                <br>
+                <div class="font-bold" for="role" :value="__('Role')">ロール</div>
+
+                <div class="mt-4 flex w-2 gap-5">
+                    <label for="role" class="break-keep">教師</label>
+                    <input type="radio" id="teacher" name="teacher" value="teacher" checked>
+                    <label for="role" class="break-keep">学生</label>
+                    <input type="radio" id="student" name="student" value="student">
                 </div>
                 <!-- Password -->
                 <div class="mt-4">
-                    <x-input-label for="password" :value="__('Password')" />
+                    <x-input-label for="password" :value="__('パスワード')" />
 
                     <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
                         autocomplete="new-password" />
@@ -59,7 +55,7 @@
 
                 <!-- Confirm Password -->
                 <div class="mt-4">
-                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                    <x-input-label for="password_confirmation" :value="__('パスワード確認')" />
 
                     <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
                         name="password_confirmation" required autocomplete="new-password" />
@@ -70,11 +66,11 @@
                 <div class="flex items-center justify-end mt-4">
                     <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                         href="{{ route('login') }}">
-                        {{ __('Already registered?') }}
+                        {{ __('アカウントがある?') }}
                     </a>
 
                     <x-primary-button class="ml-4">
-                        {{ __('Register') }}
+                        {{ __('レジスター　　') }}
                     </x-primary-button>
                 </div>
             </form>

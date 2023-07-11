@@ -19,7 +19,7 @@
             <br>
             <h5>ログイン</h5>
             <br><br><br>
-            <p>Don't have an account? <a href="/register" style="color:green">Creat Your Account</a> it takes less than a minute</p>
+            <p>アカウントがない？ <a href="/register" style="color:green">登録しよう</a></p>
             <br><br>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -49,8 +49,8 @@
                         </a>
                     @endif
         
-                    <x-primary-button class="ml-3">
-                        {{ __('Log in') }}
+                    <x-primary-button class="text-sm flex-col">
+                        {{ __('ログイン　　') }}
                     </x-primary-button>
                 </div>
             </form>
