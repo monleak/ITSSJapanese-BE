@@ -39,9 +39,9 @@
 
                 <div class="mt-4 flex w-2 gap-5">
                     <label for="role" class="break-keep">教師</label>
-                    <input type="radio" id="teacher" name="teacher" value="teacher" checked>
+                    <input type="radio" id="teacher" name="role" value="teacher" checked>
                     <label for="role" class="break-keep">学生</label>
-                    <input type="radio" id="student" name="student" value="student">
+                    <input type="radio" id="student" name="role" value="student">
                 </div>
                 <!-- Password -->
                 <div class="mt-4">
