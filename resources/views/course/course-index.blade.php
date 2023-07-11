@@ -76,7 +76,7 @@
             @php
                 use App\Models\Teacher;
                 
-                $teachers = Teacher::latest()->paginate(3);
+                $teachers = Teacher::latest()->paginate(2);
             @endphp
             @if (count($teachers) == 0)
                 <p>No teachers available</p>

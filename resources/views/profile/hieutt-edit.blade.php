@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"/>
-    <title>Document</title>
+    <title>ichisensei</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <meta charset="UTF-8" />

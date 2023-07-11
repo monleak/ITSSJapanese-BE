@@ -23,6 +23,10 @@ return new class extends Migration
             $table->float('experience');
             $table->text('description');
             $table->string('photo');
+            $table->string('facebook');
+            $table->string('zalo');
+            $table->string('phoneNumber');
+            $table->string('twitter');
             $table->timestamps();
         });
     }

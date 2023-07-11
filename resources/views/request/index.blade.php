@@ -23,7 +23,7 @@ Dong y / Tu choi --}}
                 </div>
             @else --}}
             <div class="flex flex-col justify-center items-center mt-4">
-                <h1 class="mb-2 text-4xl">リクエストのリクエスト</h1>
+                <h1 class="mb-2 text-4xl">リクエストのリスト</h1>
             </div>
             <table class="w-full">
                 <tbody>

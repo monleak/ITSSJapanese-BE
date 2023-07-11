@@ -21,6 +21,11 @@ class Teacher extends Model
         'experience',	
         'description',
         'photo',
+        'facebook',
+        'zalo',
+        'email',
+        'phoneNumber',
+        'twitter',
     ];
 
     public function Courses(){
