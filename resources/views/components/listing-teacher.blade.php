@@ -3,7 +3,7 @@
     use App\Models\Teacher;
     use App\Models\User;
     
-    $user = Teacher::find($item->id);
+    $teacher = Teacher::find($item->id);
 @endphp
 
 <div class="table-cell bg-gray-50 border border-gray-200 rounded p-6">
@@ -11,11 +11,11 @@
         <img class="hidden w-48 mr-6 md:block" src="{{ asset('images/ava.png') }}" alt="" />
         <div>
             <h3 class="text-2xl font-bold">
-                {{ $user->fullname }}
+                <a class="hover:text-red-500" href="/teacher/{{ $teacher->id }}">{{ $teacher->fullname }}</a>
             </h3>
             <ul class="list-outside list-disc">
                 <li>HUSTの日本語教師</li>
-                <li><b>{{$user->experience}}</b>年の指導経験</li>
+                <li><b>{{ $teacher->experience }}</b>年の指導経験</li>
                 <li>N5からN1レベルのクラスを提供</li>
             </ul>
             <br>
