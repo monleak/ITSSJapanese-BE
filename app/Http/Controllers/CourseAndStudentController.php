@@ -10,6 +10,7 @@ class CourseAndStudentController extends Controller
 {
     public function addStudentToCourse(Request $request){
         // dd($_POST['status']);
+
         if($_POST['status'] === "accepted"){
             CourseAndStudent::create([
                 'course_id' => $_POST['course_id'] ,

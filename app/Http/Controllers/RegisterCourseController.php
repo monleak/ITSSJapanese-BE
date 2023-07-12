@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\RegisterCourse;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterCourseController extends Controller
 {
@@ -17,14 +18,11 @@ class RegisterCourseController extends Controller
      */
     public function index()
     {
-        // if(isset(Auth::user()->role)&&(Auth::user()->role == 'teacher')){
-        //     return view('course.course-index',[
-        //         'listings'=> Course::latest()->filter(request(['search']))->get()
-        //     ]);
-        // }
-        // // dd($request->tag);
-        // else{
-        $requests = RegisterCourse::where('status','pending')->get();
+        // Course::find(request())
+        $requests = RegisterCourse::join('courses','courses.id','=','register_request.course_id')
+        ->where('register_request.status','pending')->where('courses.teacher_id',Auth::user()->id)
+        ->get();
+        // $requests = RegisterCourse::where('status','pending')->where('course_id',$course_id)->get();
         // dd($requests);
         return view('request.index',['request' => $requests]);
         
