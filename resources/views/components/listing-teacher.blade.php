@@ -16,7 +16,7 @@
             <ul class="list-outside list-disc">
                 <li>HUSTの日本語教師</li>
                 <li><b>{{ $teacher->experience }}</b>年の指導経験</li>
-                <li>N5からN1レベルのクラスを提供</li>
+                <li>AからCレベルのクラスを提供</li>
             </ul>
             <br>
             <br>
